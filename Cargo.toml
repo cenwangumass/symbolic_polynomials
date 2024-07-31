@@ -16,7 +16,7 @@ edition = "2021"
 repr_c = []
 
 [dependencies]
-num = { version = "0.1.36" }
+num = "0.4.3"
 
 [lib]
 name = "symbolic_polynomials"
