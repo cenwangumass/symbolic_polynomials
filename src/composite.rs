@@ -2,11 +2,10 @@ use std::cmp::{Ord, Ordering};
 use std::collections::{HashMap, HashSet};
 use std::rc::Rc;
 
-use polynomial::Polynomial;
-use traits::*;
+use crate::polynomial::Polynomial;
+use crate::traits::*;
 
 #[derive(Clone, Debug, PartialEq, Eq)]
-#[cfg_attr(feature = "serialize", derive(Serialize, Deserialize))]
 #[cfg_attr(feature = "repr_c", repr(C))]
 /// A composite expression (tagged union) of a variable or an irreducible function
 /// (floor, ceil, max, min).

@@ -3,12 +3,11 @@ use std::collections::{HashMap, HashSet};
 use std::convert::AsRef;
 use std::ops::{Add, Div, DivAssign, Mul, MulAssign, Neg, Sub};
 
-use composite::Composite;
-use polynomial::Polynomial;
-use traits::*;
+use crate::composite::Composite;
+use crate::polynomial::Polynomial;
+use crate::traits::*;
 
 #[derive(Clone, Default, Debug, Eq)]
-#[cfg_attr(feature = "serialize", derive(Serialize, Deserialize))]
 #[cfg_attr(feature = "repr_c", repr(C))]
 /// A symbolic monomial represented as  `C * a_1^p_1 * a_2^p_2 * ... * a_n^p_n`.
 pub struct Monomial<I, C, P>

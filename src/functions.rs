@@ -1,9 +1,10 @@
-use composite::Composite;
-use monomial::Monomial;
-use polynomial::Polynomial;
 use std::collections::HashMap;
 use std::convert::AsRef;
-use traits::*;
+
+use crate::composite::Composite;
+use crate::monomial::Monomial;
+use crate::polynomial::Polynomial;
+use crate::traits::*;
 
 /// Returns a polynomial representing 1 * x^1 + 0,
 /// where 'x' is a variable uniquely identifiable by the provided `id`.

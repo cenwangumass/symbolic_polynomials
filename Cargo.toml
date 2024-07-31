@@ -13,14 +13,10 @@ exclude = [ "examples/*" ]
 edition = "2021"
 
 [features]
-default = ["serialize"]
-serialize = ["serde", "serde_derive"]
 repr_c = []
 
 [dependencies]
 num = { version = "0.1.36" }
-serde = { version = "0.9.5", optional = true }
-serde_derive = { version = "0.9.5", optional = true }
 
 [lib]
 name = "symbolic_polynomials"

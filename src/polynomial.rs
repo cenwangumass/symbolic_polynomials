@@ -3,11 +3,10 @@ use std::collections::HashSet;
 use std::convert::AsRef;
 use std::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign};
 
-use monomial::Monomial;
-use traits::*;
+use crate::monomial::Monomial;
+use crate::traits::*;
 
 #[derive(Clone, Default, Debug, Eq)]
-#[cfg_attr(feature = "serialize", derive(Serialize, Deserialize))]
 #[cfg_attr(feature = "repr_c", repr(C))]
 /// A symbolic polynomial represented as  `m_1 + m_2 + ... + m_n`.
 pub struct Polynomial<I, C, P>

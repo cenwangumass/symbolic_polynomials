@@ -1,9 +1,9 @@
 use std::cmp::Ordering;
 use std::ops::{Add, Div, Mul, Sub};
 
-use monomial::Monomial;
-use polynomial::Polynomial;
-use traits::*;
+use crate::monomial::Monomial;
+use crate::polynomial::Polynomial;
+use crate::traits::*;
 
 macro_rules! impl_all {
     ( $( $type_:ty ),* )  => {$(
