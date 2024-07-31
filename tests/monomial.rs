@@ -1,6 +1,6 @@
 extern crate symbolic_polynomials;
-use symbolic_polynomials::*;
 use std::collections::HashMap;
+use symbolic_polynomials::*;
 
 #[allow(dead_code)]
 type TestMonomial = Monomial<String, i64, u8>;
@@ -426,7 +426,10 @@ pub fn eval_test() {
     assert_eq!(a.eval(&values), Ok(3));
     assert_eq!(b.eval(&values), Ok(7));
     assert_eq!(c.eval(&values), Ok(5));
-    assert_eq!(d.eval(&values), Err(("d".into(), "Value not provided for d.".into())));
+    assert_eq!(
+        d.eval(&values),
+        Err(("d".into(), "Value not provided for d.".into()))
+    );
 
     assert_eq!((&a * 2 * &a).eval(&values), Ok(18));
     assert_eq!((&a * 2 * &b).eval(&values), Ok(42));

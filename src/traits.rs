@@ -1,23 +1,24 @@
-use std::ops::{AddAssign, MulAssign, SubAssign, DivAssign, Neg};
-use num::{Integer, CheckedDiv, One, Zero, Unsigned};
+use num::{CheckedDiv, Integer, One, Unsigned, Zero};
+use std::ops::{AddAssign, DivAssign, MulAssign, Neg, SubAssign};
 
 /// A trait specifying all the bounds an `Id` type should meet.
 ///
 /// See the module-level documentation for more.
-pub trait Id
-    : Clone + Ord + Default + ::std::hash::Hash + ::std::fmt::Display + ::std::fmt::Debug
-    {
+pub trait Id:
+    Clone + Ord + Default + ::std::hash::Hash + ::std::fmt::Display + ::std::fmt::Debug
+{
 }
 
-impl<T> Id for T
-    where T: Clone + Ord + Default + ::std::hash::Hash + ::std::fmt::Display + ::std::fmt::Debug {
+impl<T> Id for T where
+    T: Clone + Ord + Default + ::std::hash::Hash + ::std::fmt::Display + ::std::fmt::Debug
+{
 }
 
 /// A trait specifying all the bounds a `Power` type should meet.
 ///
 /// See the module-level documentation for more.
-pub trait Power
-    : Integer
+pub trait Power:
+    Integer
     + One
     + Zero
     + Unsigned
@@ -26,27 +27,29 @@ pub trait Power
     + Clone
     + Ord
     + ::std::fmt::Display
-    + ::std::fmt::Debug {
+    + ::std::fmt::Debug
+{
 }
 
-impl<T> Power for T
-    where T: Integer
-                 + One
-                 + Zero
-                 + Unsigned
-                 + ::num::ToPrimitive
-                 + ::num::FromPrimitive
-                 + Clone
-                 + Ord
-                 + ::std::fmt::Display
-                 + ::std::fmt::Debug {
+impl<T> Power for T where
+    T: Integer
+        + One
+        + Zero
+        + Unsigned
+        + ::num::ToPrimitive
+        + ::num::FromPrimitive
+        + Clone
+        + Ord
+        + ::std::fmt::Display
+        + ::std::fmt::Debug
+{
 }
 
 /// A trait specifying all the bounds a `Coefficient` type should meet.
 ///
 /// See the module-level documentation for more.
-pub trait Coefficient
-    : Integer
+pub trait Coefficient:
+    Integer
     + One
     + ::num::ToPrimitive
     + ::num::FromPrimitive
@@ -58,21 +61,23 @@ pub trait Coefficient
     + Neg<Output = Self>
     + Clone
     + ::std::fmt::Display
-    + ::std::fmt::Debug {
+    + ::std::fmt::Debug
+{
 }
 
-impl<T> Coefficient for T
-    where T: Integer
-                 + One
-                 + ::num::ToPrimitive
-                 + ::num::FromPrimitive
-                 + CheckedDiv
-                 + AddAssign<T>
-                 + SubAssign<T>
-                 + MulAssign<T>
-                 + DivAssign<T>
-                 + Neg<Output = T>
-                 + Clone
-                 + ::std::fmt::Display
-                 + ::std::fmt::Debug {
+impl<T> Coefficient for T where
+    T: Integer
+        + One
+        + ::num::ToPrimitive
+        + ::num::FromPrimitive
+        + CheckedDiv
+        + AddAssign<T>
+        + SubAssign<T>
+        + MulAssign<T>
+        + DivAssign<T>
+        + Neg<Output = T>
+        + Clone
+        + ::std::fmt::Display
+        + ::std::fmt::Debug
+{
 }

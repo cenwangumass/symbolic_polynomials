@@ -31,12 +31,18 @@ pub fn constructor() {
     assert!(!a.is_constant());
     assert_eq!(a.monomials.len(), 1);
     assert_eq!(a.monomials[0].coefficient, 1);
-    assert_eq!(a.monomials[0].powers, vec![(Composite::Variable("a".into()), 1)]);
+    assert_eq!(
+        a.monomials[0].powers,
+        vec![(Composite::Variable("a".into()), 1)]
+    );
 
     assert!(!b.is_constant());
     assert_eq!(b.monomials.len(), 1);
     assert_eq!(b.monomials[0].coefficient, 5);
-    assert_eq!(b.monomials[0].powers, vec![(Composite::Variable("b".into()), 1)]);
+    assert_eq!(
+        b.monomials[0].powers,
+        vec![(Composite::Variable("b".into()), 1)]
+    );
 }
 
 #[test]
@@ -65,7 +71,6 @@ pub fn partial_eq_test() {
     assert_eq!(a_v2, a);
     assert_eq!(b, b_v2);
     assert_eq!(b_v2, b);
-
 
     assert_ne!(ab, a);
     assert_ne!(a, ab);
@@ -171,7 +176,10 @@ pub fn mul_test() {
         ]
     );
     assert_eq!(product.monomials[2].coefficient, 2);
-    assert_eq!(product.monomials[2].powers, vec![(Composite::Variable("a".into()), 2)]);
+    assert_eq!(
+        product.monomials[2].powers,
+        vec![(Composite::Variable("a".into()), 2)]
+    );
     assert_eq!(product.monomials[3].coefficient, 1);
     assert_eq!(
         product.monomials[3].powers,
@@ -189,7 +197,10 @@ pub fn mul_test() {
         ]
     );
     assert_eq!(product.monomials[5].coefficient, 1);
-    assert_eq!(product.monomials[5].powers, vec![(Composite::Variable("b".into()), 2)]);
+    assert_eq!(
+        product.monomials[5].powers,
+        vec![(Composite::Variable("b".into()), 2)]
+    );
     assert_eq!(product.monomials[6].coefficient, 2);
     assert_eq!(product.monomials[6].powers.len(), 0);
 }
@@ -207,8 +218,14 @@ pub fn div_test() {
     // (ab + a^2 + 1) = a * (a + b) + 1
     let (a_plus_b, one) = ab_plus_a_square_plus_one.div_rem(&a);
 
-    assert_eq!(&product / &ab_plus_a_square_plus_one, ab_plus_b_square_plus_two);
-    assert_eq!(&product / &ab_plus_b_square_plus_two, ab_plus_a_square_plus_one);
+    assert_eq!(
+        &product / &ab_plus_a_square_plus_one,
+        ab_plus_b_square_plus_two
+    );
+    assert_eq!(
+        &product / &ab_plus_b_square_plus_two,
+        ab_plus_a_square_plus_one
+    );
 
     assert_eq!(a_plus_b, &a + &b);
     assert_eq!(one, 1);
@@ -313,11 +330,23 @@ pub fn eval_test() {
     let product = &ab_plus_a_square_plus_one * &a_plus_b_plus_c_plus_1;
     assert_eq!(product.eval(&values), Ok(496));
 
-    assert_eq!(floor(&product, TestPolynomial::from(3)).eval(&values), Ok(165));
-    assert_eq!(ceil(&product, TestPolynomial::from(3)).eval(&values), Ok(166));
+    assert_eq!(
+        floor(&product, TestPolynomial::from(3)).eval(&values),
+        Ok(165)
+    );
+    assert_eq!(
+        ceil(&product, TestPolynomial::from(3)).eval(&values),
+        Ok(166)
+    );
 
-    assert_eq!(floor(&product, TestPolynomial::from(16)).eval(&values), Ok(31));
-    assert_eq!(ceil(&product, TestPolynomial::from(16)).eval(&values), Ok(31));
+    assert_eq!(
+        floor(&product, TestPolynomial::from(16)).eval(&values),
+        Ok(31)
+    );
+    assert_eq!(
+        ceil(&product, TestPolynomial::from(16)).eval(&values),
+        Ok(31)
+    );
 
     assert_eq!(floor(&product, &a).eval(&values), Ok(165));
     assert_eq!(ceil(&product, &a).eval(&values), Ok(166));
@@ -328,11 +357,23 @@ pub fn eval_test() {
     assert_eq!(floor(&product, &c).eval(&values), Ok(99));
     assert_eq!(ceil(&product, &c).eval(&values), Ok(100));
 
-    assert_eq!(max(&product, &ab_plus_a_square_plus_one).eval(&values), Ok(496));
-    assert_eq!(min(&product, &ab_plus_a_square_plus_one).eval(&values), Ok(31));
+    assert_eq!(
+        max(&product, &ab_plus_a_square_plus_one).eval(&values),
+        Ok(496)
+    );
+    assert_eq!(
+        min(&product, &ab_plus_a_square_plus_one).eval(&values),
+        Ok(31)
+    );
 
-    assert_eq!(max(&-&product, &ab_plus_a_square_plus_one).eval(&values), Ok(31));
-    assert_eq!(min(&-&product, &ab_plus_a_square_plus_one).eval(&values), Ok(-496));
+    assert_eq!(
+        max(&-&product, &ab_plus_a_square_plus_one).eval(&values),
+        Ok(31)
+    );
+    assert_eq!(
+        min(&-&product, &ab_plus_a_square_plus_one).eval(&values),
+        Ok(-496)
+    );
 
     // Making a + b + 1 = 0
     values.clear();

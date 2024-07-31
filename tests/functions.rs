@@ -1,9 +1,9 @@
+use std::collections::{HashMap, HashSet};
 use std::rc::Rc;
-use std::collections::{HashSet, HashMap};
-extern crate symbolic_polynomials;
 extern crate num;
-use symbolic_polynomials::*;
+extern crate symbolic_polynomials;
 use num::Integer;
+use symbolic_polynomials::*;
 
 #[allow(dead_code)]
 type TestMonomial = Monomial<String, i64, u8>;
@@ -334,11 +334,12 @@ pub fn deduce_values_test_floor_min() {
     let two = TestPolynomial::from(2);
     implicit_values.push((poly2.clone(), val2));
     // 5a^2b^2c^2 + floor(ab^2, 2) + min(a^2, b^2) + 3
-    let poly3 = 5 * &a * &a * &b * &b * &c * &c + floor(&a * &b * &b, &two) +
-                min(&a * &a, &b * &b) + 3;
-    let val3 = 5 * a_val * a_val * b_val * b_val * c_val * c_val +
-               (a_val * b_val * b_val).div_floor(&2) +
-               ::std::cmp::min(a_val * a_val, b_val * b_val) + 3;
+    let poly3 =
+        5 * &a * &a * &b * &b * &c * &c + floor(&a * &b * &b, &two) + min(&a * &a, &b * &b) + 3;
+    let val3 = 5 * a_val * a_val * b_val * b_val * c_val * c_val
+        + (a_val * b_val * b_val).div_floor(&2)
+        + ::std::cmp::min(a_val * a_val, b_val * b_val)
+        + 3;
     implicit_values.push((poly3.clone(), val3));
     let values = deduce_values(&implicit_values).unwrap();
 
@@ -368,8 +369,8 @@ pub fn deduce_values_test_ceil_max() {
     implicit_values.push((poly1.clone(), val1));
     // a^2 + ceil(c^2, 6) + max(c^2, 12) + 2
     let poly2 = &a * &a + ceil(&c * &c, &six) + max(&c * &c, TestPolynomial::from(12)) + 2;
-    let mut val2 = a_val * a_val + (c_val * c_val).div_floor(&6) +
-                   ::std::cmp::max(c_val * c_val, 12) + 2;
+    let mut val2 =
+        a_val * a_val + (c_val * c_val).div_floor(&6) + ::std::cmp::max(c_val * c_val, 12) + 2;
     if c_val * c_val % 6 != 0 {
         val2 += 1;
     }
@@ -404,16 +405,24 @@ pub fn deduce_values_test_all() {
     let val1 = 3 * b_val * b_val;
     implicit_values.push((poly1.clone(), val1));
     // a^3 + floor(b^3, 3) - 10 - min(b^2, 17)
-    let poly2 = &a * &a * &a + floor(&b * &b * &b, TestPolynomial::from(3)) - 10 -
-                min(&b * &b, TestPolynomial::from(17));
-    let val2 = a_val * a_val * a_val + (b_val * b_val * b_val).div_floor(&3) - 10 -
-               ::std::cmp::min(b_val * b_val, 17);
+    let poly2 = &a * &a * &a + floor(&b * &b * &b, TestPolynomial::from(3))
+        - 10
+        - min(&b * &b, TestPolynomial::from(17));
+    let val2 = a_val * a_val * a_val + (b_val * b_val * b_val).div_floor(&3)
+        - 10
+        - ::std::cmp::min(b_val * b_val, 17);
     implicit_values.push((poly2.clone(), val2));
     // ceil(7ab, 5) + ac + bc + 3 + max(ab - 5, a + 2b)
-    let poly3 = ceil(7 * &a * &b, TestPolynomial::from(5)) + &a * &c + &b * &c + 3 +
-                max(&a * &b - 5, &a + 2 * &b);
-    let mut val3 = (7 * a_val * b_val).div_floor(&5) + a_val * c_val + b_val * c_val + 3 +
-                   ::std::cmp::max(a_val * b_val - 5, a_val + 2 * b_val);
+    let poly3 = ceil(7 * &a * &b, TestPolynomial::from(5))
+        + &a * &c
+        + &b * &c
+        + 3
+        + max(&a * &b - 5, &a + 2 * &b);
+    let mut val3 = (7 * a_val * b_val).div_floor(&5)
+        + a_val * c_val
+        + b_val * c_val
+        + 3
+        + ::std::cmp::max(a_val * b_val - 5, a_val + 2 * b_val);
     if 7 * a_val * b_val % 5 != 0 {
         val3 += 1;
     }
@@ -451,12 +460,18 @@ pub fn deduce_values_test_fails() {
     let poly3 = &a * &c * &c + &b * &c + 2;
     let val3 = a_val * c_val * c_val + b_val * c_val + 2;
     implicit_values.push((poly3.clone(), val3));
-    assert_eq!(deduce_values(&implicit_values), Err("Could not deduce all variables.".into()));
+    assert_eq!(
+        deduce_values(&implicit_values),
+        Err("Could not deduce all variables.".into())
+    );
 
     // 2bc + 1
     let poly2 = 2 * &b * &c + 1;
     let val2 = 2 * b_val * c_val + 1;
     implicit_values.remove(1);
     implicit_values.push((poly2.clone(), val2));
-    assert_eq!(deduce_values(&implicit_values), Err("Could not deduce all variables.".into()));
+    assert_eq!(
+        deduce_values(&implicit_values),
+        Err("Could not deduce all variables.".into())
+    );
 }

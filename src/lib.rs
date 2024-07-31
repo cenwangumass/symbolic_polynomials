@@ -121,16 +121,16 @@ extern crate serde_derive;
 
 extern crate num;
 
-mod traits;
+mod composite;
 mod functions;
+mod integer_impl;
 mod monomial;
 mod polynomial;
-mod composite;
-mod integer_impl;
+mod traits;
 
-pub use traits::*;
-pub use monomial::*;
-pub use polynomial::*;
 pub use composite::*;
 pub use functions::*;
 pub use integer_impl::*;
+pub use monomial::*;
+pub use polynomial::*;
+pub use traits::*;

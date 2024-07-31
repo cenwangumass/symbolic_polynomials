@@ -74,9 +74,21 @@ pub fn main() {
     println!("{} = {} [Expected 9]", poly8, poly8.eval(values).unwrap());
     println!("{} = {} [Expected 18]", poly9, poly9.eval(values).unwrap());
     println!("{} = {} [Expected 4]", poly10, poly10.eval(values).unwrap());
-    println!("{} = {} [Expected 144]", poly11, poly11.eval(values).unwrap());
-    println!("{} = {} [Expected 12]", poly12, poly12.eval(values).unwrap());
-    println!("{} = {} [Expected 12]", poly13, poly13.eval(values).unwrap());
+    println!(
+        "{} = {} [Expected 144]",
+        poly11,
+        poly11.eval(values).unwrap()
+    );
+    println!(
+        "{} = {} [Expected 12]",
+        poly12,
+        poly12.eval(values).unwrap()
+    );
+    println!(
+        "{} = {} [Expected 12]",
+        poly13,
+        poly13.eval(values).unwrap()
+    );
     println!("{}", (0..50).map(|_| "=").collect::<String>());
 
     // Variable deduction
